@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
+import React, { useRef, useEffect, forwardRef, useImperativeHandle, useState } from 'react';
 import './SplitterCanvas.css';
 
 const SplitterCanvas = forwardRef(({ image, tool, partType, onAddPart }, ref) => {
@@ -7,6 +7,7 @@ const SplitterCanvas = forwardRef(({ image, tool, partType, onAddPart }, ref) =>
   const imageRef = useRef(null);
   const isDrawingRef = useRef(false);
   const pathRef = useRef([]);
+  const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
   
   useImperativeHandle(ref, () => ({
     getCanvas: () => canvasRef.current,
@@ -22,8 +23,27 @@ const SplitterCanvas = forwardRef(({ image, tool, partType, onAddPart }, ref) =>
       
       // Set up canvas
       const canvas = canvasRef.current;
+      const container = canvas.parentElement;
+      
+      // Adjust size to fit container while maintaining aspect ratio
+      const containerWidth = container.clientWidth;
+      const scale = containerWidth / img.width;
+      const scaledHeight = img.height * scale;
+      
+      // Set displayed size
+      canvas.style.width = `${containerWidth}px`;
+      canvas.style.height = `${scaledHeight}px`;
+      
+      // Set actual canvas dimensions (for high resolution)
       canvas.width = img.width;
       canvas.height = img.height;
+      
+      setCanvasSize({
+        width: containerWidth,
+        height: scaledHeight,
+        scaleX: img.width / containerWidth,
+        scaleY: img.height / scaledHeight
+      });
       
       const context = canvas.getContext('2d');
       context.lineCap = 'round';
@@ -33,7 +53,7 @@ const SplitterCanvas = forwardRef(({ image, tool, partType, onAddPart }, ref) =>
       contextRef.current = context;
       
       // Draw the image
-      context.drawImage(img, 0, 0);
+      context.drawImage(img, 0, 0, img.width, img.height);
     };
   }, [image]);
   
@@ -57,24 +77,44 @@ const SplitterCanvas = forwardRef(({ image, tool, partType, onAddPart }, ref) =>
   };
   
   const startDrawing = ({ nativeEvent }) => {
-    const { offsetX, offsetY } = nativeEvent;
+    const canvas = canvasRef.current;
+    const rect = canvas.getBoundingClientRect();
+    
+    // Calculate positions with proper scaling
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    
+    // Get mouse position relative to canvas
+    const x = (nativeEvent.clientX - rect.left) * scaleX;
+    const y = (nativeEvent.clientY - rect.top) * scaleY;
+    
     contextRef.current.beginPath();
-    contextRef.current.moveTo(offsetX, offsetY);
+    contextRef.current.moveTo(x, y);
     isDrawingRef.current = true;
     
     // Save point for path
-    pathRef.current = [{ x: offsetX, y: offsetY }];
+    pathRef.current = [{ x, y }];
   };
   
   const draw = ({ nativeEvent }) => {
     if (!isDrawingRef.current) return;
     
-    const { offsetX, offsetY } = nativeEvent;
-    contextRef.current.lineTo(offsetX, offsetY);
+    const canvas = canvasRef.current;
+    const rect = canvas.getBoundingClientRect();
+    
+    // Calculate positions with proper scaling
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    
+    // Get mouse position relative to canvas
+    const x = (nativeEvent.clientX - rect.left) * scaleX;
+    const y = (nativeEvent.clientY - rect.top) * scaleY;
+    
+    contextRef.current.lineTo(x, y);
     contextRef.current.stroke();
     
     // Save point for path
-    pathRef.current.push({ x: offsetX, y: offsetY });
+    pathRef.current.push({ x, y });
   };
   
   const finishDrawing = () => {
