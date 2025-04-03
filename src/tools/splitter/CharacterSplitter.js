@@ -22,7 +22,8 @@ const CharacterSplitter = () => {
     const newPart = {
       id: Date.now(),
       type: currentPartType,
-      maskData: partData,
+      maskData: partData.path,
+      previewUrl: partData.previewUrl,
       name: `${currentPartType.charAt(0).toUpperCase() + currentPartType.slice(1)} ${parts.length + 1}`,
     };
     
@@ -73,8 +74,11 @@ const CharacterSplitter = () => {
                   {parts.map(part => (
                     <div key={part.id} className="part-preview">
                       <div className="part-image">
-                        {/* Placeholder for part preview */}
-                        <div className="placeholder-image"></div>
+                        {part.previewUrl ? (
+                          <img src={part.previewUrl} alt={part.name} />
+                        ) : (
+                          <div className="placeholder-image"></div>
+                        )}
                       </div>
                       <span className="part-name">{part.name}</span>
                     </div>

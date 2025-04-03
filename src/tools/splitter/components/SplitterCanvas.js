@@ -128,9 +128,26 @@ const SplitterCanvas = forwardRef(({ image, tool, partType, onAddPart }, ref) =>
     contextRef.current.closePath();
     isDrawingRef.current = false;
     
-    // Simple example - in a real app, this would extract the area inside the path
+    // Solo se abbiamo abbastanza punti per formare un percorso
     if (pathRef.current.length > 2) {
-      onAddPart(pathRef.current);
+      // Crea un canvas temporaneo per l'anteprima della parte
+      const tempCanvas = document.createElement('canvas');
+      const originalCanvas = canvasRef.current;
+      tempCanvas.width = originalCanvas.width / 4;
+      tempCanvas.height = originalCanvas.height / 4;
+      const tempCtx = tempCanvas.getContext('2d');
+      
+      // Ridimensiona e disegna l'immagine originale sul canvas temporaneo
+      tempCtx.drawImage(originalCanvas, 0, 0, tempCanvas.width, tempCanvas.height);
+      
+      // Genera una miniatura
+      const dataURL = tempCanvas.toDataURL();
+      
+      // Aggiungi la parte con l'anteprima
+      onAddPart({
+        path: pathRef.current,
+        previewUrl: dataURL
+      });
     }
   };
   
