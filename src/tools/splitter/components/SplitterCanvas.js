@@ -25,24 +25,36 @@ const SplitterCanvas = forwardRef(({ image, tool, partType, onAddPart }, ref) =>
       const canvas = canvasRef.current;
       const container = canvas.parentElement;
       
-      // Adjust size to fit container while maintaining aspect ratio
-      const containerWidth = container.clientWidth;
-      const scale = containerWidth / img.width;
-      const scaledHeight = img.height * scale;
+      // Calculate max available width and height
+      const maxWidth = container.clientWidth - 20; // padding
+      const maxHeight = 500; // max height constraint
+      
+      // Calculate aspect ratio
+      const imgRatio = img.width / img.height;
+      
+      // Determine dimensions that fit within constraints while maintaining aspect ratio
+      let width = maxWidth;
+      let height = width / imgRatio;
+      
+      // If height exceeds max, adjust it and recalculate width
+      if (height > maxHeight) {
+        height = maxHeight;
+        width = height * imgRatio;
+      }
       
       // Set displayed size
-      canvas.style.width = `${containerWidth}px`;
-      canvas.style.height = `${scaledHeight}px`;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
       
       // Set actual canvas dimensions (for high resolution)
-      canvas.width = img.width;
-      canvas.height = img.height;
+      canvas.width = width * 2;  // For higher resolution
+      canvas.height = height * 2;
       
       setCanvasSize({
-        width: containerWidth,
-        height: scaledHeight,
-        scaleX: img.width / containerWidth,
-        scaleY: img.height / scaledHeight
+        width: width,
+        height: height,
+        scaleX: canvas.width / width,
+        scaleY: canvas.height / height
       });
       
       const context = canvas.getContext('2d');
@@ -52,8 +64,11 @@ const SplitterCanvas = forwardRef(({ image, tool, partType, onAddPart }, ref) =>
       context.lineWidth = 5;
       contextRef.current = context;
       
+      // Scale context to match canvas resolution
+      context.scale(2, 2);
+      
       // Draw the image
-      context.drawImage(img, 0, 0, img.width, img.height);
+      context.drawImage(img, 0, 0, width, height);
     };
   }, [image]);
   
@@ -80,13 +95,9 @@ const SplitterCanvas = forwardRef(({ image, tool, partType, onAddPart }, ref) =>
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
     
-    // Calculate positions with proper scaling
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    
     // Get mouse position relative to canvas
-    const x = (nativeEvent.clientX - rect.left) * scaleX;
-    const y = (nativeEvent.clientY - rect.top) * scaleY;
+    const x = nativeEvent.clientX - rect.left;
+    const y = nativeEvent.clientY - rect.top;
     
     contextRef.current.beginPath();
     contextRef.current.moveTo(x, y);
@@ -102,13 +113,9 @@ const SplitterCanvas = forwardRef(({ image, tool, partType, onAddPart }, ref) =>
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
     
-    // Calculate positions with proper scaling
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    
     // Get mouse position relative to canvas
-    const x = (nativeEvent.clientX - rect.left) * scaleX;
-    const y = (nativeEvent.clientY - rect.top) * scaleY;
+    const x = nativeEvent.clientX - rect.left;
+    const y = nativeEvent.clientY - rect.top;
     
     contextRef.current.lineTo(x, y);
     contextRef.current.stroke();
