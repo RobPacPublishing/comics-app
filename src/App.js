@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import CharacterComposer from './tools/composer/CharacterComposer';
+import CharacterSplitter from './tools/splitter/CharacterSplitter';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
         <h1>Comics App</h1>
       </header>
       <main className="app-main">
-        <CharacterComposer />
+        <CharacterSplitter />
       </main>
     </div>
   );

@@ -1,0 +1,27 @@
+.splitter-canvas-container {
+  flex: 1;
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: #f5f5f5;
+}
+
+.splitter-canvas {
+  display: block;
+  background-color: white;
+  max-width: 100%;
+  max-height: 500px;
+  margin: 0 auto;
+}
+
+.current-tool-indicator {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 12px;
+}
