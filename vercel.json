@@ -1,6 +1,6 @@
-echo '{
+{
   "framework": "create-react-app",
   "installCommand": "npm install",
   "buildCommand": "npm run build",
   "outputDirectory": "build"
-}' > vercel.json
+}
