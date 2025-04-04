@@ -1,17 +1,16 @@
 // src/App.js
-
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { BodyPartsProvider } from './context/BodyPartsContext';
 import Navigation from './components/Navigation';
 import CharacterComposer from './tools/composer/CharacterComposer';
 import CharacterSplitter from './tools/splitter/CharacterSplitter';
+import PoseEditor from './tools/poseeditor/PoseEditor'; // Importazione del nuovo componente PoseEditor
 import HomePage from './components/HomePage';
 import NotFound from './components/NotFound';
 import './App.css';
 
 // Componenti placeholder per le funzionalità future
-const PoseEditor = () => <div className="placeholder">Pose Editor (In sviluppo)</div>;
 const LayoutEditor = () => <div className="placeholder">Layout Editor (In sviluppo)</div>;
 const Gallery = () => <div className="placeholder">Galleria (In sviluppo)</div>;
 const Settings = () => <div className="placeholder">Impostazioni (In sviluppo)</div>;

@@ -1,0 +1,174 @@
+/* src/tools/poseeditor/components/PoseControls.css */
+.pose-controls {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.pose-controls h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+.pose-controls h4 {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #444;
+}
+
+.pose-controls h5 {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.part-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.control-section {
+  padding: 10px;
+  background-color: #f8f8f8;
+  border-radius: 6px;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.movement-row button {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  padding: 0;
+}
+
+.center-btn {
+  background-color: #f0f0f0 !important;
+  cursor: default !important;
+}
+
+.direction {
+  background-color: #4a90e2 !important;
+  color: white !important;
+}
+
+.diagonal {
+  background-color: #3a80d2 !important;
+  color: white !important;
+}
+
+.no-selection-message {
+  padding: 15px;
+  background-color: #f8f8f8;
+  border-radius: 6px;
+  text-align: center;
+  color: #666;
+}
+
+.pose-management {
+  margin-top: 10px;
+  padding: 15px;
+  background-color: #f8f8f8;
+  border-radius: 6px;
+}
+
+.primary-button {
+  background-color: #4a90e2 !important;
+  color: white !important;
+  border: none !important;
+}
+
+.primary-button:hover {
+  background-color: #3a80d2 !important;
+}
+
+.secondary-button {
+  background-color: #e0e0e0 !important;
+  color: #333 !important;
+}
+
+.secondary-button:hover {
+  background-color: #d0d0d0 !important;
+}
+
+.save-dialog {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pose-name-input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.dialog-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.pose-select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 14px;
+}
+
+.no-poses-message {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  margin: 10px 0;
+}
+}
+
+.button-group button {
+  padding: 6px 10px;
+  background-color: #e0e0e0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  flex: 1;
+  min-width: 40px;
+  transition: background-color 0.2s;
+}
+
+.button-group button:hover {
+  background-color: #d0d0d0;
+}
+
+.movement-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.movement-row {
+  display: flex;
+  justify-content: center;
+  gap: 5px;

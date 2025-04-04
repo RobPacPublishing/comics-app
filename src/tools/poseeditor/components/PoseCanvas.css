@@ -1,0 +1,14 @@
+/* src/tools/poseeditor/components/PoseCanvas.css */
+.pose-canvas-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pose-canvas-wrapper canvas {
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
