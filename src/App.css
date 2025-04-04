@@ -1,13 +1,189 @@
-.App {
-  text-align: center;
+/* src/App.css */
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f5f7fa;
 }
 
-.app-header {
-  background-color: #282c34;
-  padding: 20px;
+.app-content {
+  flex: 1;
+  padding: 1.5rem;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.app-footer {
+  background-color: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: auto;
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  background-color: #ecf0f1;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  color: #7f8c8d;
+  border: 2px dashed #bdc3c7;
+}
+
+/* Stili comuni per i tools */
+.tool-container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+}
+
+.tool-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.tool-header h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #2c3e50;
+}
+
+.tool-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.tool-section {
+  margin-bottom: 2rem;
+}
+
+.tool-section-title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #34495e;
+  font-weight: 600;
+}
+
+/* Stili per i bottoni */
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #3498db;
   color: white;
 }
 
-.app-main {
-  padding: 20px;
+.btn-primary:hover {
+  background-color: #2980b9;
+}
+
+.btn-secondary {
+  background-color: #ecf0f1;
+  color: #2c3e50;
+}
+
+.btn-secondary:hover {
+  background-color: #bdc3c7;
+}
+
+.btn-success {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #27ae60;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c0392b;
+}
+
+/* Stili per i form e gli input */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form-control:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+/* Layout a griglia per le parti */
+.parts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.part-item {
+  border: 1px solid #ecf0f1;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: white;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.part-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.part-image {
+  width: 100%;
+  height: 120px;
+  background-color: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: contain;
+}
+
+.part-info {
+  padding: 0.5rem;
+}
+
+.part-title {
+  font-size: 0.9rem;
+  margin: 0 0 0.25rem;
+  font-weight: 500;
+}
+
+.part-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
 }
